@@ -906,11 +906,11 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 		$file_list = path_list(sprintf("%s",$folder_name));
 	}	
 	$folders = $file_list['folderlist'];
-
-
+	print sprintf("<p> <a href=%s?folder_name=%s>%s</a>", $_SERVER['PHP_SELF'],$folder_name."/.",".");
+	print sprintf("<p> <a href=%s?folder_name=%s>%s</a>", $_SERVER['PHP_SELF'],$folder_name."/..","..");
 	for($i=0;$i<count($folders);$i++)
 	{
-		$links=sprintf("<p> <a href=%s?folder_name=%s%s>%s</a> %s", $_SERVER['PHP_SELF'],$folders[$i]['path'],$folders[$i]['name'],$folders[$i]['name'], $files[$i]['mode']);
+		$links=sprintf("<p> <a href=%s?folder_name=%s%s>%s</a>", $_SERVER['PHP_SELF'],$folders[$i]['path'],$folders[$i]['name'],$folders[$i]['name']);
 		print($links);
 	}
 
@@ -925,7 +925,7 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 		print($links);
 	}
 	echo "<p>";
-	print sprintf("%s%s",dirname(__FILE__),platform_name($folder_name));
+	print dirname(__FILE__).platform_name($folder_name);
 	}
 }
 
